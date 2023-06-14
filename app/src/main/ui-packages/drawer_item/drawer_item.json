@@ -1,0 +1,103 @@
+{
+  "name": "drawer_item",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "GwW8elg2g04gCcbmAhBkl6",
+    "node": "52:2",
+    "version": "3627427199",
+    "component-id": "f75608bd4331ee1e1dd3bcb126893bdc7e3df280"
+  },
+  "default": "drawer_item",
+  "documentation": "drawer item",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "Calendar"
+      },
+      {
+        "type": "text",
+        "id": "My Appointments"
+      }
+    ],
+    "modes": {
+      "drawer_item": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Calendar",
+              "My Appointments"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Calendar",
+            "margin": {
+              "right": "130.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "image-content": "calendar.png",
+            "scale": "cover"
+          },
+          {
+            "id": "My Appointments",
+            "margin": {
+              "left": "30.0",
+              "top": "1.0",
+              "bottom": "3.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "My Appointments",
+            "overflow": "visible",
+            "letter-spacing": "0.7000000000000001",
+            "line-height": "1.171875"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "drawer_item",
+      "size": {
+        "width": 150.0,
+        "height": 20.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

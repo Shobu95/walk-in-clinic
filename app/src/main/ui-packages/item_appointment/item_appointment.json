@@ -1,0 +1,341 @@
+{
+  "name": "item_appointment",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "GwW8elg2g04gCcbmAhBkl6",
+    "node": "35:3",
+    "version": "3624335054",
+    "component-id": "f26ce7380efa31af5240c82b162ab71e60e38183"
+  },
+  "default": "item_appointment",
+  "documentation": "appointment",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 16"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 17"
+      },
+      {
+        "type": "text",
+        "id": "12"
+      },
+      {
+        "type": "text",
+        "id": "September"
+      },
+      {
+        "type": "text",
+        "id": "12:30 PM"
+      },
+      {
+        "type": "text",
+        "id": "Dr. Joshua Bolt"
+      },
+      {
+        "type": "text",
+        "id": "Cardiologist"
+      },
+      {
+        "type": "image",
+        "id": "Hospital"
+      },
+      {
+        "type": "text",
+        "id": "Patients Choice Medical Clinic"
+      }
+    ],
+    "modes": {
+      "item_appointment": {
+        "rules": [
+          {
+            "id": "top_level",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "0.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "is-structured": "false",
+            "children": [
+              "Rectangle 16",
+              "Rectangle 17",
+              "12",
+              "September",
+              "12:30 PM",
+              "Dr. Joshua Bolt",
+              "Cardiologist",
+              "Hospital",
+              "Patients Choice Medical Clinic"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 16",
+            "border-radius": "12.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_16.svg"
+          },
+          {
+            "id": "Rectangle 17",
+            "margin": {
+              "left": "17.0",
+              "top": "11.0",
+              "right": "232.0",
+              "bottom": "46.0"
+            },
+            "border-radius": "7.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_17.svg"
+          },
+          {
+            "id": "12",
+            "margin": {
+              "left": "29.0",
+              "top": "16.0",
+              "right": "245.0",
+              "bottom": "60.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "12",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "26.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "September",
+            "margin": {
+              "left": "22.0",
+              "top": "47.0",
+              "right": "236.0",
+              "bottom": "55.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "September",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "10.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "12:30 PM",
+            "margin": {
+              "left": "264.0",
+              "top": "19.0",
+              "right": "11.0",
+              "bottom": "83.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "12:30 PM",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "10.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "Dr. Joshua Bolt",
+            "margin": {
+              "left": "102.0",
+              "top": "19.0",
+              "right": "118.0",
+              "bottom": "75.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Dr. Joshua Bolt",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "Cardiologist",
+            "margin": {
+              "left": "104.0",
+              "top": "37.0",
+              "right": "158.0",
+              "bottom": "62.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.6352941176470588"
+            },
+            "text-content": "Cardiologist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "10.0",
+            "line-height": "1.171875"
+          },
+          {
+            "id": "Hospital",
+            "margin": {
+              "left": "28.0",
+              "top": "81.0",
+              "right": "272.0",
+              "bottom": "14.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "image-content": "hospital.png",
+            "scale": "cover"
+          },
+          {
+            "id": "Patients Choice Medical Clinic",
+            "margin": {
+              "left": "52.0",
+              "top": "84.0",
+              "right": "92.0",
+              "bottom": "14.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.5607843137254902"
+            },
+            "text-content": "Patients Choice Medical Clinic\n",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "12.0",
+            "line-height": "1.171875"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "item_appointment",
+      "size": {
+        "width": 318.0,
+        "height": 113.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

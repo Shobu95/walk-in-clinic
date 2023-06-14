@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">walk-in-appointment</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="title_launch">Launch</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Sign Up</string>
+    <string name="next">Next</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_my_appointments">My Appointments</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_book_appointment">Book Appointment</string>
+    <string name="title_logout">Logout</string>
+    <string name="already_have_account">"Already have an account? "</string>
+    <string name="dont_have_account">"Don't have an account? "</string>
+    <string name="app_title">Walk-In Clinic</string>
+    <string name="login_successfull">Login Successful</string>
+</resources>
