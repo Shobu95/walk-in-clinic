@@ -141,7 +141,7 @@ fun LoginScreen(
 
             LaunchedEffect(key1 = true) {
                 loginViewModel.loginFailState.collectLatest {
-                    delay(2000)
+                    delay(1000)
                     showDialog = false
                     ShowToastAlert(
                         context = context,

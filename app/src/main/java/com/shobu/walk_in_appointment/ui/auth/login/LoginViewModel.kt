@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCase
 import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCaseResponse
+import com.shobu.walk_in_appointment.domain.use_cases.ValidateLoginFieldsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -16,11 +17,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.xml.validation.Validator
 
 @HiltViewModel
 class LoginViewModel
 @Inject constructor(
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val loginValidation: ValidateLoginFieldsUseCase = ValidateLoginFieldsUseCase()
 ) : ViewModel() {
 
     var state by mutableStateOf(LoginState())
@@ -35,7 +38,6 @@ class LoginViewModel
             loginUseCase.loginState.collectLatest { event ->
                 when (event) {
                     is LoginUseCaseResponse.OnLoginFailed -> {
-                        Log.d("email_exists", "here")
                         _loginFailState.emit(
                             LoginFailedState(
                                 isFailed = true,
@@ -62,8 +64,19 @@ class LoginViewModel
             }
 
             LoginEvents.OnLoginClicked -> {
-                loginUseCase.invoke(state.email, state.password)
+                if (loginValidation(state.email, state.password).first)
+                    loginUseCase.invoke(state.email, state.password)
+                else
+                    viewModelScope.launch {
+                        _loginFailState.emit(
+                            LoginFailedState(
+                                isFailed = true,
+                                message = loginValidation(state.email, state.password).second
+                            )
+                        )
+                    }
             }
+
         }
     }
 }
