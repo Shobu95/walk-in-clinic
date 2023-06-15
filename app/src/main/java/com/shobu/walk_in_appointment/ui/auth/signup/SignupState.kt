@@ -8,3 +8,8 @@ data class SignupState(
     var password: String = "",
     var signupSuccess: Boolean = false,
 )
+
+data class SignupFailedState(
+    var isFailed: Boolean = false,
+    var message: String = ""
+)

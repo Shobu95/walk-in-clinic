@@ -46,9 +46,11 @@ import com.shobu.walk_in_appointment.ui.components.ClickTextView
 import com.shobu.walk_in_appointment.ui.components.ImageWIthText
 import com.shobu.walk_in_appointment.ui.components.PrimaryButton
 import com.shobu.walk_in_appointment.ui.components.ProgressDialog
+import com.shobu.walk_in_appointment.ui.components.ShowToastAlert
 import com.shobu.walk_in_appointment.ui.home.HomeActivity
 import com.shobu.walk_in_appointment.ui.navigation.auth_nav.AuthNavRoutes
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Preview
@@ -177,6 +179,19 @@ fun SignupScreen(
             R.string.already_have_account,
             R.string.login
         ) { navController.navigate(AuthNavRoutes.Login.route) }
+
+        LaunchedEffect(key1 = true) {
+            signupViewModel.signupFailState.collectLatest {
+                delay(1000)
+                showDialog = false
+                ShowToastAlert(
+                    context = context,
+                    message = it.message
+                )
+            }
+        }
+
+
     }
 }
 
