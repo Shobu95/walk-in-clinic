@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.shobu.walk_in_appointment.domain.models.User
 import com.shobu.walk_in_appointment.domain.use_cases.CreateUserUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.SaveUserSessionUseCase
 import com.shobu.walk_in_appointment.domain.use_cases.ValidateUserUseCase
-import com.shobu.walk_in_appointment.ui.auth.login.LoginFailedState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +21,7 @@ import javax.inject.Inject
 class SignupViewModel
 @Inject constructor(
     private val createUserUseCase: CreateUserUseCase,
+    private val saveUserSession: SaveUserSessionUseCase,
     private val validateUserUseCase: ValidateUserUseCase = ValidateUserUseCase()
 ) : ViewModel() {
 
@@ -44,7 +45,7 @@ class SignupViewModel
                     val newUser = User(
                         id = null,
                         fullName = state.fullName,
-                        dob = state.dob,
+                        dateOfBirth = state.dob,
                         gender = state.gender,
                         email = state.email,
                         password = state.password
@@ -55,6 +56,7 @@ class SignupViewModel
                         state = state.copy(
                             signupSuccess = true
                         )
+                        saveUserSession(newUser)
                     } else
                         _signupFailState.emit(
                             SignupFailedState(

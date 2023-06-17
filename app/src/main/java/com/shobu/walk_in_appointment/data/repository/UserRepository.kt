@@ -27,7 +27,7 @@ fun User.asEntityModel(): UserEntity {
     return UserEntity(
         id = this.id,
         name = this.fullName,
-        dateOfBirth = this.dob,
+        dateOfBirth = this.dateOfBirth,
         gender = this.gender,
         email = this.email,
         password = this.password,
@@ -39,7 +39,7 @@ fun List<UserEntity>.asDomainModelList(): List<User> {
         User(
             id = it.id,
             fullName = it.name,
-            dob = it.dateOfBirth,
+            dateOfBirth = it.dateOfBirth,
             gender = it.gender,
             email = it.email,
             password = it.password

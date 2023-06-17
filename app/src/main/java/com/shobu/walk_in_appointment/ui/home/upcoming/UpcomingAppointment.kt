@@ -1,7 +1,9 @@
-package com.shobu.walk_in_appointment.ui.home.upcoming_appointment
+package com.shobu.walk_in_appointment.ui.home.upcoming
 
 import NavDrawerItem
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -23,11 +25,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_appointment.R
+import com.shobu.walk_in_appointment.ui.auth.AuthActivity
 import com.shobu.walk_in_appointment.ui.components.MyTopAppBar
 import com.shobu.walk_in_appointment.ui.navigation.nav_drawer.getNavList
 import kotlinx.coroutines.launch
@@ -38,7 +43,8 @@ import kotlinx.coroutines.launch
 fun UpcomingAppointmentScreenPrev() {
     val navController = rememberNavController()
     UpcomingAppointmentScreen(
-        R.string.title_home, navController
+        R.string.title_home,
+        navController
     )
 }
 
@@ -47,10 +53,13 @@ fun UpcomingAppointmentScreenPrev() {
 @Composable
 fun UpcomingAppointmentScreen(
     @StringRes title: Int,
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: UpcomingViewModel = hiltViewModel(),
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+
     // icons to mimic drawer destinations
     val items = getNavList()
     val selectedItem = remember { mutableStateOf(items[0]) }
@@ -71,6 +80,9 @@ fun UpcomingAppointmentScreen(
                     ) {
                         scope.launch { drawerState.close() }
                         selectedItem.value = item
+                        if (item.title == R.string.title_logout) {
+                            viewModel.onEvent(UpcomingEvent.OnLogout)
+                        }
                     }
                     Spacer(Modifier.height(20.dp))
 
@@ -92,9 +104,19 @@ fun UpcomingAppointmentScreen(
                     modifier = Modifier
                         .padding(paddingValues)
                         .fillMaxSize()
+                        .padding(horizontal = 30.dp)
                         .background(MaterialTheme.colorScheme.background),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+
+                    if (viewModel.state.onLogout) {
+                        context.startActivity(Intent(context, AuthActivity::class.java))
+                        (context as Activity).finishAffinity()
+                    }
+
+                    UserInfo(viewModel.state.fullName)
+
+
                 }
             }
         }

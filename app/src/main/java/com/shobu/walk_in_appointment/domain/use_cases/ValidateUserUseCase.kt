@@ -12,7 +12,7 @@ class ValidateUserUseCase
             return Pair(false, "Please enter full name")
         }
 
-        if(user.dob.isNullOrEmpty()) {
+        if (user.dateOfBirth.isNullOrEmpty()) {
             return Pair(false, "Please select date of birth")
         }
 

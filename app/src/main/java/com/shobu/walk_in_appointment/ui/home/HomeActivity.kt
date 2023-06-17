@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.walk_in_appointment.ui.theme.AppTheme
-import com.shobu.walk_in_appointment.ui.navigation.auth_nav.AuthNavGraph
 import com.shobu.walk_in_appointment.ui.navigation.home_nav.HomeNavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

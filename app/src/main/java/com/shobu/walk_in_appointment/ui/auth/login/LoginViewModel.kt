@@ -1,6 +1,5 @@
 package com.shobu.walk_in_appointment.ui.auth.login
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,21 +7,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCase
 import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCaseResponse
+import com.shobu.walk_in_appointment.domain.use_cases.SaveUserSessionUseCase
 import com.shobu.walk_in_appointment.domain.use_cases.ValidateLoginFieldsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.xml.validation.Validator
 
 @HiltViewModel
 class LoginViewModel
 @Inject constructor(
     private val loginUseCase: LoginUseCase,
+    private val saveUserSession: SaveUserSessionUseCase,
     private val loginValidation: ValidateLoginFieldsUseCase = ValidateLoginFieldsUseCase()
 ) : ViewModel() {
 
@@ -37,6 +36,7 @@ class LoginViewModel
         viewModelScope.launch {
             loginUseCase.loginState.collectLatest { event ->
                 when (event) {
+
                     is LoginUseCaseResponse.OnLoginFailed -> {
                         _loginFailState.emit(
                             LoginFailedState(
@@ -46,7 +46,8 @@ class LoginViewModel
                         )
                     }
 
-                    LoginUseCaseResponse.OnLoginSuccess -> {
+                    is LoginUseCaseResponse.OnLoginSuccess -> {
+                        saveUserSession(event.user)
                         state = state.copy(
                             loginSuccess = true
                         )

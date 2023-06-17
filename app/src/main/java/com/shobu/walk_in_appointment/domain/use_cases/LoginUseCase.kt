@@ -39,7 +39,7 @@ class LoginUseCase
                         )
                     } else {
                         _loginState.emit(
-                            LoginUseCaseResponse.OnLoginSuccess
+                            LoginUseCaseResponse.OnLoginSuccess(selectedUser)
                         )
                     }
                 }
@@ -67,5 +67,5 @@ class LoginUseCase
 
 sealed class LoginUseCaseResponse {
     data class OnLoginFailed(val message: String) : LoginUseCaseResponse()
-    object OnLoginSuccess : LoginUseCaseResponse()
+    data class OnLoginSuccess(val user: User) : LoginUseCaseResponse()
 }

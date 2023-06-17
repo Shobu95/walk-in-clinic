@@ -1,5 +1,6 @@
 package com.example.walk_in_appointment.ui.splash
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,11 +31,20 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
 import com.example.walk_in_appointment.ui.theme.AppTheme
 import com.shobu.walk_in_appointment.R
+import com.shobu.walk_in_appointment.data.prefs.PreferenceKeys
+import com.shobu.walk_in_appointment.data.prefs.UserPreferences
 import com.shobu.walk_in_appointment.ui.auth.AuthActivity
+import com.shobu.walk_in_appointment.ui.home.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var prefs: UserPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -47,24 +57,27 @@ class SplashActivity : ComponentActivity() {
                     SplashScreenBody()
                 }
             }
-            navigateToHome(LocalContext.current)
+
+            if (prefs.getString(PreferenceKeys.FULL_NAME, "").isNullOrEmpty()) {
+                navigateActivity(LocalContext.current, AuthActivity())
+            } else {
+                navigateActivity(LocalContext.current, HomeActivity())
+            }
+
         }
     }
 
-
-    private fun navigateToHome(context: Context) {
+    private fun navigateActivity(context: Context, activity: Activity) {
         lifecycleScope.launch {
             delay(1000)
             val intent = Intent(
                 this@SplashActivity,
-                AuthActivity::class.java
+                activity::class.java
             )
             context.startActivity(intent)
             finish()
         }
     }
-
-
 }
 
 @Preview
