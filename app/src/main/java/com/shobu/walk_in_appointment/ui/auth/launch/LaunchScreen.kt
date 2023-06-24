@@ -22,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_appointment.R
@@ -81,7 +80,7 @@ fun LaunchScreen(
             Spacer(modifier = Modifier.height(18.dp))
 
             PrimaryButton(
-                buttonText = R.string.signup,
+                buttonText = R.string.create_an_account,
                 backgroundColor = MaterialTheme.colorScheme.secondary
             ) {
                 navController.navigate(AuthNavRoutes.Signup.route)

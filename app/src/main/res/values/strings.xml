@@ -24,4 +24,9 @@
     <string name="dont_have_account">"Don't have an account? "</string>
     <string name="app_title">Walk-In Clinic</string>
     <string name="login_successfull">Login Successful</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="create">Create</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="title_search_for_clinics">Search For Clinics</string>
 </resources>

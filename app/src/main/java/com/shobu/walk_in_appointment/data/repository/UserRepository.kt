@@ -26,7 +26,8 @@ class UserRepository
 fun User.asEntityModel(): UserEntity {
     return UserEntity(
         id = this.id,
-        name = this.fullName,
+        fullName = this.fullName,
+        phoneNumber = this.phoneNumber,
         dateOfBirth = this.dateOfBirth,
         gender = this.gender,
         email = this.email,
@@ -38,7 +39,8 @@ fun List<UserEntity>.asDomainModelList(): List<User> {
     return map {
         User(
             id = it.id,
-            fullName = it.name,
+            fullName = it.fullName,
+            phoneNumber = it.phoneNumber,
             dateOfBirth = it.dateOfBirth,
             gender = it.gender,
             email = it.email,

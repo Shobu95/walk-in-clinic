@@ -18,8 +18,8 @@ fun getNavList(): List<NavDrawerItems> {
             {}
         ),
         NavDrawerItems(
-            R.string.title_book_appointment,
-            R.drawable.ic_appointment_book,
+            R.string.title_search_for_clinics,
+            R.drawable.ic_search,
             {}
         ),
         NavDrawerItems(

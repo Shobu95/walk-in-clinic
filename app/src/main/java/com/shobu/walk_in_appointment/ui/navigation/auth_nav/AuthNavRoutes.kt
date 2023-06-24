@@ -22,7 +22,7 @@ sealed class AuthNavRoutes(
 
     object Signup :
         AuthNavRoutes(
-            R.string.title_register,
+            R.string.create_an_account,
             "signup"
         )
 

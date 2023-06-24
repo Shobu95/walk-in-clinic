@@ -11,6 +11,7 @@ class GetSessionUseCase
         return User(
             id = prefs.getInt(PreferenceKeys.USER_ID, 0),
             fullName = prefs.getString(PreferenceKeys.FULL_NAME, ""),
+            phoneNumber = prefs.getString(PreferenceKeys.PHONE_NUMBER, ""),
             gender = prefs.getString(PreferenceKeys.GENDER, ""),
             dateOfBirth = prefs.getString(PreferenceKeys.DATE_OF_BIRTH, ""),
             email = prefs.getString(PreferenceKeys.EMAIL, ""),

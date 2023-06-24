@@ -1,10 +1,7 @@
 package com.shobu.walk_in_appointment.ui.auth.signup
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,28 +9,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_appointment.R
@@ -51,13 +39,12 @@ import com.shobu.walk_in_appointment.ui.home.HomeActivity
 import com.shobu.walk_in_appointment.ui.navigation.auth_nav.AuthNavRoutes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @Preview
 @Composable
 fun SignupScreenPrev() {
     val navController = rememberNavController()
-    SignupScreen(R.string.title_register, navController)
+    SignupScreen(R.string.create_an_account, navController)
 }
 
 @Composable
@@ -96,9 +83,24 @@ fun SignupScreen(
                 )
             }
 
+            Spacer(modifier = Modifier.height(10.dp))
+            var phoneNumberValue = remember { mutableStateOf(signupViewModel.state.phoneNumber) }
+            BorderedTextField(
+                textFieldValue = phoneNumberValue,
+                R.string.phone_number
+            ) { phoneNumber ->
+                signupViewModel.onEvent(
+                    SignupEvents.OnStateChange(
+                        state = signupViewModel.state.copy(
+                            phoneNumber = phoneNumber
+                        )
+                    )
+                )
+            }
 
-            Spacer(modifier = Modifier.height(30.dp))
-            var dateValue = remember { mutableStateOf(signupViewModel.state.dob) }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            var dateValue = remember { mutableStateOf(signupViewModel.state.dateOfBirth) }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 BorderedDatePickerField(
                     value = dateValue.value,
@@ -108,7 +110,7 @@ fun SignupScreen(
                         signupViewModel.onEvent(
                             SignupEvents.OnStateChange(
                                 state = signupViewModel.state.copy(
-                                    dob = date
+                                    dateOfBirth = date
                                 )
                             )
                         )
@@ -116,7 +118,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             BorderedDropDown(hint = R.string.gender) { gender ->
                 signupViewModel.onEvent(
                     SignupEvents.OnStateChange(
@@ -127,7 +129,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             var emailValue = remember { mutableStateOf(signupViewModel.state.email) }
             BorderedTextField(textFieldValue = emailValue, R.string.email) { email ->
                 signupViewModel.onEvent(
@@ -139,7 +141,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             var passwordValue = remember { mutableStateOf(signupViewModel.state.password) }
             BorderedPasswordField(textFieldValue = passwordValue, R.string.password) { password ->
                 signupViewModel.onEvent(
@@ -151,9 +153,25 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            var confirmPasswordValue =
+                remember { mutableStateOf(signupViewModel.state.confirmPassword) }
+            BorderedPasswordField(
+                textFieldValue = confirmPasswordValue,
+                R.string.confirm_password
+            ) { confirmPassword ->
+                signupViewModel.onEvent(
+                    SignupEvents.OnStateChange(
+                        state = signupViewModel.state.copy(
+                            confirmPassword = confirmPassword
+                        )
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
             PrimaryButton(
-                buttonText = R.string.signup,
+                buttonText = R.string.create_an_account,
                 backgroundColor = MaterialTheme.colorScheme.secondary
             ) {
                 signupViewModel.onEvent(SignupEvents.OnSignupClicked)

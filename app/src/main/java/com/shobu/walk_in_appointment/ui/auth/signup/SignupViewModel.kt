@@ -45,13 +45,14 @@ class SignupViewModel
                     val newUser = User(
                         id = null,
                         fullName = state.fullName,
-                        dateOfBirth = state.dob,
+                        phoneNumber = state.phoneNumber,
+                        dateOfBirth = state.dateOfBirth,
                         gender = state.gender,
                         email = state.email,
                         password = state.password
                     )
 
-                    if (validateUserUseCase(newUser).first) {
+                    if (validateUserUseCase(state).first) {
                         createUserUseCase(user = newUser)
                         state = state.copy(
                             signupSuccess = true
@@ -61,7 +62,7 @@ class SignupViewModel
                         _signupFailState.emit(
                             SignupFailedState(
                                 isFailed = true,
-                                message = validateUserUseCase(newUser).second
+                                message = validateUserUseCase(state).second
                             )
                         )
                 }
