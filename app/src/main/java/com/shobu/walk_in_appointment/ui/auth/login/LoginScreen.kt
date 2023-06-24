@@ -32,7 +32,7 @@ import com.shobu.walk_in_appointment.ui.components.ImageWIthText
 import com.shobu.walk_in_appointment.ui.components.PrimaryButton
 import com.shobu.walk_in_appointment.ui.components.ProgressDialog
 import com.shobu.walk_in_appointment.ui.components.ShowToastAlert
-import com.shobu.walk_in_appointment.ui.home.HomeActivity
+import com.shobu.walk_in_appointment.ui.main.MainActivity
 import com.shobu.walk_in_appointment.ui.navigation.auth_nav.AuthNavRoutes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -113,7 +113,7 @@ fun LoginScreen(
                         context = context,
                         message = "Login Successfully"
                     )
-                    AuthActivity.navigateToActivity(context, HomeActivity())
+                    AuthActivity.navigateToActivity(context, MainActivity())
                 }
             }
 

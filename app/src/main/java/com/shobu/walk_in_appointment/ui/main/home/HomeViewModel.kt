@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.ui.home.upcoming
+package com.shobu.walk_in_appointment.ui.main.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UpcomingViewModel
+class HomeViewModel
 @Inject constructor(
     private val getSessionUseCase: GetSessionUseCase,
     private val clearUserSession: ClearUserSessionUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(UpcomingState())
+    var state by mutableStateOf(HomeState())
         private set
 
     init {
@@ -29,9 +29,9 @@ class UpcomingViewModel
         }
     }
 
-    fun onEvent(event: UpcomingEvent) {
+    fun onEvent(event: HomeEvent) {
         when (event) {
-            UpcomingEvent.OnLogout -> {
+            HomeEvent.OnLogout -> {
                 clearUserSession()
                 state = state.copy(
                     onLogout = true

@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.ui.home.upcoming
+package com.shobu.walk_in_appointment.ui.main.home
 
 import NavDrawerItem
 import android.annotation.SuppressLint
@@ -46,7 +46,9 @@ import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_appointment.R
 import com.shobu.walk_in_appointment.ui.auth.AuthActivity
 import com.shobu.walk_in_appointment.ui.components.MyTopAppBar
+import com.shobu.walk_in_appointment.ui.main.MainActivity
 import com.shobu.walk_in_appointment.ui.navigation.nav_drawer.getNavList
+import com.shobu.walk_in_appointment.ui.profile.ProfileActivity
 import kotlinx.coroutines.launch
 
 
@@ -54,7 +56,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun UpcomingAppointmentScreenPrev() {
     val navController = rememberNavController()
-    UpcomingAppointmentScreen(
+    HomeScreen(
         R.string.title_home,
         navController
     )
@@ -63,10 +65,10 @@ fun UpcomingAppointmentScreenPrev() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UpcomingAppointmentScreen(
+fun HomeScreen(
     @StringRes title: Int,
     navController: NavHostController,
-    viewModel: UpcomingViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -121,7 +123,9 @@ fun UpcomingAppointmentScreen(
                         scope.launch { drawerState.close() }
                         selectedItem.value = item
                         if (item.title == R.string.title_logout) {
-                            viewModel.onEvent(UpcomingEvent.OnLogout)
+                            viewModel.onEvent(HomeEvent.OnLogout)
+                        } else if (item.title == R.string.title_profile) {
+                            MainActivity.navigateToActivity(context, ProfileActivity())
                         }
                     }
                     Spacer(Modifier.height(20.dp))

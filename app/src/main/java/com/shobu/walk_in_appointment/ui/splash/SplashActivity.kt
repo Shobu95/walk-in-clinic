@@ -29,12 +29,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
-import com.example.walk_in_appointment.ui.theme.AppTheme
+import com.example.walk_in_appointment.ui.theme.WalkInClinicTheme
 import com.shobu.walk_in_appointment.R
 import com.shobu.walk_in_appointment.data.prefs.PreferenceKeys
 import com.shobu.walk_in_appointment.data.prefs.UserPreferences
 import com.shobu.walk_in_appointment.ui.auth.AuthActivity
-import com.shobu.walk_in_appointment.ui.home.HomeActivity
+import com.shobu.walk_in_appointment.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,7 +48,7 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
+            WalkInClinicTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -61,7 +61,7 @@ class SplashActivity : ComponentActivity() {
             if (prefs.getString(PreferenceKeys.FULL_NAME, "").isNullOrEmpty()) {
                 navigateActivity(LocalContext.current, AuthActivity())
             } else {
-                navigateActivity(LocalContext.current, HomeActivity())
+                navigateActivity(LocalContext.current, MainActivity())
             }
 
         }

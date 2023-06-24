@@ -4,33 +4,34 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.shobu.walk_in_appointment.ui.home.my_appointment.MyAppointmentsScreen
-import com.shobu.walk_in_appointment.ui.home.profile.ProfileScreen
-import com.shobu.walk_in_appointment.ui.home.upcoming.UpcomingAppointmentScreen
+import com.shobu.walk_in_appointment.ui.main.home.HomeScreen
+import com.shobu.walk_in_appointment.ui.main.my_appointment.MyAppointmentsScreen
+import com.shobu.walk_in_appointment.ui.main.profile.ProfileScreen
 
 @Composable
-fun HomeNavGraph(navController: NavHostController) {
+fun MainNavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = HomeNavRoutes.Home.route) {
+        startDestination = MainNavRoutes.Home.route
+    ) {
 
-        composable(HomeNavRoutes.Home.route) {
-            UpcomingAppointmentScreen(
-                title = HomeNavRoutes.Home.title,
+        composable(MainNavRoutes.Home.route) {
+            HomeScreen(
+                title = MainNavRoutes.Home.title,
                 navController = navController
             )
         }
 
-        composable(HomeNavRoutes.MyAppointments.route) {
+        composable(MainNavRoutes.MyAppointments.route) {
             MyAppointmentsScreen(
-                title = HomeNavRoutes.MyAppointments.title,
+                title = MainNavRoutes.MyAppointments.title,
             )
         }
 
-        composable(HomeNavRoutes.Profile.route) {
+        composable(MainNavRoutes.Profile.route) {
             ProfileScreen(
-                HomeNavRoutes.Profile.title,
+                MainNavRoutes.Profile.title,
             )
         }
 

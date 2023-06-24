@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.ui.home.upcoming
+package com.shobu.walk_in_appointment.ui.main.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

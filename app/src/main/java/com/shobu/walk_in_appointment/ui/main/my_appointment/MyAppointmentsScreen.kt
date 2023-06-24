@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.ui.home.profile
+package com.shobu.walk_in_appointment.ui.main.my_appointment
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -8,14 +8,12 @@ import com.shobu.walk_in_appointment.R
 
 @Preview
 @Composable
-fun ProfileScreenPrev() {
-    ProfileScreen(
-        R.string.title_profile
-    )
+fun MyAppointmentsScreenPrev() {
+    MyAppointmentsScreen(R.string.title_my_appointments)
 }
 
 @Composable
-fun ProfileScreen(
+fun MyAppointmentsScreen(
     @StringRes title: Int,
 ) {
 
