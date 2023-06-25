@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.domain.use_cases
+package com.shobu.walk_in_appointment.domain.use_cases.authentication
 
 import com.shobu.walk_in_appointment.data.repository.UserRepository
 import com.shobu.walk_in_appointment.domain.models.User

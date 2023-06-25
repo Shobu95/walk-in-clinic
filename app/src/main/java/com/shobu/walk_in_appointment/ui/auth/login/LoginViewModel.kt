@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCase
-import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCaseResponse
-import com.shobu.walk_in_appointment.domain.use_cases.SaveUserSessionUseCase
-import com.shobu.walk_in_appointment.domain.use_cases.ValidateLoginFieldsUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.authentication.LoginUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.authentication.LoginUseCaseResponse
+import com.shobu.walk_in_appointment.domain.use_cases.authentication.SaveUserSessionUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.validations.ValidateLoginFieldsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.shobu.walk_in_appointment.domain.models.User
-import com.shobu.walk_in_appointment.domain.use_cases.CreateUserUseCase
-import com.shobu.walk_in_appointment.domain.use_cases.SaveUserSessionUseCase
-import com.shobu.walk_in_appointment.domain.use_cases.ValidateUserUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.authentication.CreateUserUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.authentication.SaveUserSessionUseCase
+import com.shobu.walk_in_appointment.domain.use_cases.validations.ValidateUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class SignupViewModel
 @Inject constructor(
     private val createUserUseCase: CreateUserUseCase,
     private val saveUserSession: SaveUserSessionUseCase,
-    private val validateUserUseCase: ValidateUserUseCase = ValidateUserUseCase()
+    private val validateUserUseCase: ValidateUserUseCase
 ) : ViewModel() {
 
     var state by mutableStateOf(SignupState())

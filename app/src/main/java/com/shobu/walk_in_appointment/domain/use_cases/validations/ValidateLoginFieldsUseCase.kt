@@ -1,4 +1,4 @@
-package com.shobu.walk_in_appointment.domain.use_cases
+package com.shobu.walk_in_appointment.domain.use_cases.validations
 
 import javax.inject.Inject
 

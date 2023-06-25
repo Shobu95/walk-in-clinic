@@ -1,10 +1,12 @@
-package com.shobu.walk_in_appointment.domain.use_cases
+package com.shobu.walk_in_appointment.domain.use_cases.validations
 
 import com.shobu.walk_in_appointment.ui.auth.signup.SignupState
 import javax.inject.Inject
 
 class ValidateUserUseCase
-@Inject constructor() {
+@Inject constructor(
+    private val passwordValidation: PasswordValidationUseCase
+) {
 
     operator fun invoke(userState: SignupState): Pair<Boolean, String> {
 
@@ -30,6 +32,10 @@ class ValidateUserUseCase
 
         if (userState.password.isEmpty()) {
             return Pair(false, "Please enter password")
+        }
+
+        if (!passwordValidation(userState.password).first) {
+            return Pair(false, passwordValidation(userState.password).second)
         }
 
         if (userState.password != userState.confirmPassword) {

@@ -1,6 +1,7 @@
-package com.shobu.walk_in_appointment.domain.use_cases
+package com.shobu.walk_in_appointment.domain.use_cases.authentication
 
 import com.shobu.walk_in_appointment.domain.models.User
+import com.shobu.walk_in_appointment.domain.use_cases.GetAllUsersUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

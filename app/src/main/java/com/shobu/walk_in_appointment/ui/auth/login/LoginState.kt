@@ -1,7 +1,5 @@
 package com.shobu.walk_in_appointment.ui.auth.login
 
-import com.shobu.walk_in_appointment.domain.use_cases.LoginUseCaseResponse
-
 data class LoginState(
     var email: String = "",
     var password: String = "",
