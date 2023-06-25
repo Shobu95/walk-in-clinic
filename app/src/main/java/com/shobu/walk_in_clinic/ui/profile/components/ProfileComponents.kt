@@ -44,19 +44,6 @@ fun PersonalDetails(
         modifier = Modifier.background(color = Color.White)
     ) {
 
-        Text(
-            text = "Profile",
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.roboto),
-                ),
-                fontWeight = FontWeight.ExtraBold
-            )
-        )
-
-        Spacer(modifier = Modifier.height(40.dp))
-
         val profilePic = painterResource(id = R.drawable.profile_pic)
         Image(
             painter = profilePic,

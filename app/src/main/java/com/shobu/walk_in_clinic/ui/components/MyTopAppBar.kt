@@ -2,7 +2,7 @@ package com.shobu.walk_in_clinic.ui.components
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,7 +29,7 @@ fun MyTopAppBar(
             if (showBack) {
                 IconButton(onClick = { onActionPressed() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.Filled.ArrowBackIos,
                         contentDescription = "Localized description"
                     )
                 }
