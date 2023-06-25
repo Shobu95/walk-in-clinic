@@ -1,5 +1,6 @@
 package com.shobu.walk_in_appointment.domain.use_cases.validations
 
+import android.util.Patterns
 import com.shobu.walk_in_appointment.ui.auth.signup.SignupState
 import javax.inject.Inject
 
@@ -27,6 +28,10 @@ class ValidateUserUseCase
         }
 
         if (userState.email.isEmpty()) {
+            return Pair(false, "Please enter email")
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(userState.email).matches()) {
             return Pair(false, "Please enter valid email")
         }
 
