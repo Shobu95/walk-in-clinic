@@ -50,16 +50,40 @@ fun ProfileScreen(
             .fillMaxSize()
             .background(color = Color.White)
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         PersonalDetails(viewModel.state.fullName)
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         ProfileDetailsItem(
             R.drawable.ic_calendar,
             viewModel.state.dateOfBirth,
             "Date of Birth"
+        )
+
+        ProfileDetailsItem(
+            R.drawable.ic_gender,
+            viewModel.state.gender,
+            "Gender"
+        )
+
+        ProfileDetailsItem(
+            R.drawable.ic_appointment_book,
+            viewModel.state.totalAppointments.toString(),
+            "Total Appointments"
+        )
+
+        ProfileDetailsItem(
+            R.drawable.ic_height,
+            viewModel.state.height,
+            "Height"
+        )
+
+        ProfileDetailsItem(
+            R.drawable.ic_weight,
+            viewModel.state.weight,
+            "Weight"
         )
 
     }

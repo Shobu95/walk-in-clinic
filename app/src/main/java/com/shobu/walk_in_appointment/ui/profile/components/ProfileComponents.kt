@@ -55,13 +55,13 @@ fun PersonalDetails(
             )
         )
 
-        Spacer(modifier = Modifier.height(44.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         val profilePic = painterResource(id = R.drawable.profile_pic)
         Image(
             painter = profilePic,
             contentDescription = "profile pic",
-            Modifier.size(150.dp)
+            Modifier.size(120.dp)
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -85,8 +85,8 @@ fun PersonalDetails(
 fun ProfileDetailsItemPrev() {
     ProfileDetailsItem(
         R.drawable.profile_pic,
-        "Honda Civic Turbo",
-        "Vehicle"
+        "Description",
+        "Heading"
     )
 }
 
@@ -114,9 +114,9 @@ fun ProfileDetailsItem(
             Icon(
                 painter = detailPic,
                 contentDescription = "",
-                tint = TextLight,
+                tint = Color.Black,
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(45.dp)
                     .padding(10.dp)
             )
 
