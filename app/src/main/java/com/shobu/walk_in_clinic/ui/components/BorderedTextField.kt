@@ -59,10 +59,11 @@ fun BorderedTextField(
                 .fillMaxSize(),
             value = textFieldValue.value,
             onValueChange = {
-                textFieldValue.value = it
-                onTextChange(it)
+                if (!it.contains("\n")) {
+                    textFieldValue.value = it
+                    onTextChange(it)
+                }
             },
-            singleLine = true,
             maxLines = 1,
             textStyle = TextStyle(
                 fontSize = 13.sp,
