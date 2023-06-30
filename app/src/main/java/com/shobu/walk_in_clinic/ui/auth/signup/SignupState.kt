@@ -5,6 +5,8 @@ data class SignupState(
     var phoneNumber: String = "",
     var dateOfBirth: String = "",
     var gender: String = "",
+    var height: String = "",
+    var weight: String = "",
     var email: String = "",
     var password: String = "",
     var confirmPassword: String = "",

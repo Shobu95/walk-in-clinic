@@ -13,6 +13,8 @@ class GetSessionUseCase
             fullName = prefs.getString(PreferenceKeys.FULL_NAME, ""),
             phoneNumber = prefs.getString(PreferenceKeys.PHONE_NUMBER, ""),
             gender = prefs.getString(PreferenceKeys.GENDER, ""),
+            height = prefs.getString(PreferenceKeys.HEIGHT, ""),
+            weight = prefs.getString(PreferenceKeys.WEIGHT, ""),
             dateOfBirth = prefs.getString(PreferenceKeys.DATE_OF_BIRTH, ""),
             email = prefs.getString(PreferenceKeys.EMAIL, ""),
             password = "",

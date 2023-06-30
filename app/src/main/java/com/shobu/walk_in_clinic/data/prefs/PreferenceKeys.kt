@@ -6,5 +6,7 @@ object PreferenceKeys {
     const val PHONE_NUMBER = "phone_number"
     const val EMAIL = "email"
     const val GENDER = "gender"
+    const val HEIGHT = "height"
+    const val WEIGHT = "weight"
     const val DATE_OF_BIRTH = "date_of_birth"
 }

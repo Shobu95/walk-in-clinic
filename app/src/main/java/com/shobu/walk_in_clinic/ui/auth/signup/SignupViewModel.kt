@@ -48,6 +48,8 @@ class SignupViewModel
                         phoneNumber = state.phoneNumber,
                         dateOfBirth = state.dateOfBirth,
                         gender = state.gender,
+                        height = state.height,
+                        weight = state.weight,
                         email = state.email,
                         password = state.password
                     )

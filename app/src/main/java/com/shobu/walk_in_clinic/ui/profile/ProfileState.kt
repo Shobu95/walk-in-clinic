@@ -5,6 +5,6 @@ data class ProfileState(
     var dateOfBirth: String = "",
     var gender: String = "",
     var totalAppointments: Int = 0,
-    var height: String = "5'7",
-    var weight: String = "160 LBS"
+    var height: String = "",
+    var weight: String = ""
 )

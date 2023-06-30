@@ -14,6 +14,8 @@ class SaveUserSessionUseCase
         prefs.setString(PreferenceKeys.PHONE_NUMBER, user.phoneNumber)
         prefs.setString(PreferenceKeys.EMAIL, user.email)
         prefs.setString(PreferenceKeys.GENDER, user.gender)
+        prefs.setString(PreferenceKeys.HEIGHT, user.height)
+        prefs.setString(PreferenceKeys.WEIGHT, user.weight)
         prefs.setString(PreferenceKeys.DATE_OF_BIRTH, user.dateOfBirth)
     }
 }

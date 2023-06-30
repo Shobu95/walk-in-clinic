@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -18,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,11 +41,12 @@ fun BorderedTextFieldPrev() {
 fun BorderedTextField(
     textFieldValue: MutableState<String>,
     @StringRes hint: Int,
-    onTextChange: (value: String) -> Unit
+    modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    onTextChange: (value: String) -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .height(50.dp)
             .border(
                 border = BorderStroke(
@@ -55,7 +58,7 @@ fun BorderedTextField(
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextField(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize(),
             value = textFieldValue.value,
             onValueChange = {
@@ -64,6 +67,7 @@ fun BorderedTextField(
                     onTextChange(it)
                 }
             },
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
             maxLines = 1,
             textStyle = TextStyle(
                 fontSize = 13.sp,

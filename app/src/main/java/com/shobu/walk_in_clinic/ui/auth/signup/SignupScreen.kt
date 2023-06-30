@@ -5,10 +5,14 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -57,16 +62,20 @@ fun SignupScreen(
     val context = LocalContext.current
     var showDialog by remember { mutableStateOf(false) }
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        Spacer(modifier = Modifier.height(20.dp))
         ImageWIthText(title = title)
+        Spacer(modifier = Modifier.height(20.dp))
+
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(horizontal = 30.dp)
@@ -83,11 +92,12 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             var phoneNumberValue = remember { mutableStateOf(signupViewModel.state.phoneNumber) }
             BorderedTextField(
                 textFieldValue = phoneNumberValue,
-                R.string.phone_number
+                hint = R.string.phone_number,
+                keyboardType = KeyboardType.Phone,
             ) { phoneNumber ->
                 signupViewModel.onEvent(
                     SignupEvents.OnStateChange(
@@ -99,7 +109,7 @@ fun SignupScreen(
             }
 
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             var dateValue = remember { mutableStateOf(signupViewModel.state.dateOfBirth) }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 BorderedDatePickerField(
@@ -118,7 +128,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             BorderedDropDown(hint = R.string.gender) { gender ->
                 signupViewModel.onEvent(
                     SignupEvents.OnStateChange(
@@ -129,9 +139,52 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+
+                var heightValue = remember { mutableStateOf(signupViewModel.state.height) }
+                BorderedTextField(
+                    textFieldValue = heightValue,
+                    hint = R.string.height,
+                    modifier = Modifier.weight(1F)
+                ) { height ->
+                    signupViewModel.onEvent(
+                        SignupEvents.OnStateChange(
+                            state = signupViewModel.state.copy(
+                                height = height
+                            )
+                        )
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                var weightValue = remember { mutableStateOf(signupViewModel.state.weight) }
+                BorderedTextField(
+                    textFieldValue = weightValue,
+                    hint = R.string.weight,
+                    keyboardType = KeyboardType.Number,
+                    modifier = Modifier.weight(1F)
+                ) { weight ->
+                    signupViewModel.onEvent(
+                        SignupEvents.OnStateChange(
+                            state = signupViewModel.state.copy(
+                                weight = weight
+                            )
+                        )
+                    )
+                }
+            }
+
+
+
+            Spacer(modifier = Modifier.height(20.dp))
             var emailValue = remember { mutableStateOf(signupViewModel.state.email) }
-            BorderedTextField(textFieldValue = emailValue, R.string.email) { email ->
+            BorderedTextField(
+                textFieldValue = emailValue,
+                hint = R.string.email,
+                keyboardType = KeyboardType.Email
+            ) { email ->
                 signupViewModel.onEvent(
                     SignupEvents.OnStateChange(
                         state = signupViewModel.state.copy(
@@ -141,7 +194,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             var passwordValue = remember { mutableStateOf(signupViewModel.state.password) }
             BorderedPasswordField(textFieldValue = passwordValue, R.string.password) { password ->
                 signupViewModel.onEvent(
@@ -153,7 +206,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             var confirmPasswordValue =
                 remember { mutableStateOf(signupViewModel.state.confirmPassword) }
             BorderedPasswordField(
@@ -169,7 +222,7 @@ fun SignupScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(50.dp))
             PrimaryButton(
                 buttonText = R.string.create_an_account,
                 backgroundColor = MaterialTheme.colorScheme.secondary
@@ -197,6 +250,8 @@ fun SignupScreen(
             R.string.already_have_account,
             R.string.login
         ) { navController.navigate(AuthNavRoutes.Login.route) }
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         LaunchedEffect(key1 = true) {
             signupViewModel.signupFailState.collectLatest {

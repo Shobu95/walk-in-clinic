@@ -30,6 +30,8 @@ fun User.asEntityModel(): UserEntity {
         phoneNumber = this.phoneNumber,
         dateOfBirth = this.dateOfBirth,
         gender = this.gender,
+        height = this.height,
+        weight = this.weight,
         email = this.email,
         password = this.password,
     )
@@ -43,6 +45,8 @@ fun List<UserEntity>.asDomainModelList(): List<User> {
             phoneNumber = it.phoneNumber,
             dateOfBirth = it.dateOfBirth,
             gender = it.gender,
+            height = it.height,
+            weight = it.weight,
             email = it.email,
             password = it.password
         )

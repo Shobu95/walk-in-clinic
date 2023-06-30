@@ -24,7 +24,9 @@ class ProfileViewModel
             state = state.copy(
                 fullName = getSessionUseCase().fullName,
                 dateOfBirth = getSessionUseCase().dateOfBirth,
-                gender = getSessionUseCase().gender
+                gender = getSessionUseCase().gender,
+                height = getSessionUseCase().height,
+                weight = getSessionUseCase().weight
             )
         }
     }

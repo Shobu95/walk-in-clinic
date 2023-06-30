@@ -33,4 +33,6 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_search_clinic">SearchClinicActivity</string>
     <string name="search">Search Clincs</string>
+    <string name="height">Height (ft\'in)</string>
+    <string name="weight">Weight (lbs)</string>
 </resources>
