@@ -5,7 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,6 +19,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.walk_in_appointment.ui.theme.WalkInClinicTheme
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.GoogleMap
 import com.shobu.walk_in_clinic.R
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
 import com.shobu.walk_in_clinic.ui.components.SearchView
@@ -48,22 +53,35 @@ fun SearchClinicScreen(
 
     val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            MyTopAppBar(title = R.string.title_profile, showBack = true) {
-                (context as Activity).finish()
-            }
+    Scaffold(topBar = {
+        MyTopAppBar(title = R.string.title_search_clinics, showBack = true) {
+            (context as Activity).finish()
         }
-    ) { innerPadding ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+    }) { innerPadding ->
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 20.dp)
                 .background(color = Color.White)
         ) {
-            SearchView(hint = R.string.search)
+
+
+            GoogleMap(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center),
+                cameraPositionState = CameraPositionState(
+                    position = CameraPosition.fromLatLngZoom(LatLng(21.34565, 23.45678), 1f)
+                ),
+            ) {
+
+            }
+
+            Row(modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)) {
+                SearchView(
+                    hint = R.string.search,
+                )
+            }
         }
     }
 

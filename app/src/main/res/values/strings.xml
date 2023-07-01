@@ -29,6 +29,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="title_search_for_clinics">Search For Clinics</string>
+    <string name="title_search_clinics">Search Clinics</string>
     <string name="menu">Menu</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_search_clinic">SearchClinicActivity</string>

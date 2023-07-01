@@ -2,6 +2,7 @@ package com.shobu.walk_in_clinic.ui.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -43,25 +45,29 @@ fun SearchViewPrev() {
 fun SearchView(
 //    value: String,
     @StringRes hint: Int,
+    modifier: Modifier = Modifier,
 //    onValueChange: (String) -> Unit
 ) {
     val searchValue = remember { mutableStateOf("") }
 
     Row(
-        modifier = Modifier
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
+            .background(Color.Transparent)
+            .clip(RoundedCornerShape(24.dp))
             .border(
+                shape = RoundedCornerShape(24.dp),
                 border = BorderStroke(
                     width = 1.dp,
                     color = Color.Black
                 ),
-                shape = RoundedCornerShape(24.dp)
             ),
-        verticalAlignment = Alignment.CenterVertically
     ) {
         TextField(
-            modifier = Modifier
+            modifier = modifier
+                .background(Color.White)
                 .fillMaxSize(),
             value = searchValue.value,
             onValueChange = {
@@ -88,7 +94,7 @@ fun SearchView(
                 )
             },
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White,
+                containerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
