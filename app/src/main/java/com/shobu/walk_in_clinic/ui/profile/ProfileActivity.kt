@@ -103,7 +103,7 @@ fun ProfileScreen(
 
             ProfileDetailsItem(
                 R.drawable.ic_weight,
-                viewModel.state.weight,
+                viewModel.state.weight + " lbs",
                 "Weight"
             )
 

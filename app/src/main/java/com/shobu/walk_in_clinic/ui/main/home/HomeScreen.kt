@@ -96,7 +96,7 @@ fun HomeScreen(
                     val splashLogo = painterResource(id = R.drawable.app_logo)
                     Image(
                         painter = splashLogo,
-                        colorFilter = ColorFilter.tint(Color.Black),
+                        colorFilter = ColorFilter.tint(Color.White),
                         contentDescription = "splash logo",
                         modifier = Modifier.size(40.dp)
                     )
@@ -104,10 +104,10 @@ fun HomeScreen(
                     Text(
                         text = stringResource(id = R.string.menu),
                         Modifier
-                            .padding(bottom = 30.dp, top = 20.dp)
+                            .padding(bottom = 30.dp, top = 30.dp)
                             .padding(horizontal = 10.dp),
                         style = TextStyle(
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = Color.White,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center
@@ -131,7 +131,7 @@ fun HomeScreen(
                             MainActivity.navigateToActivity(context, SearchClinicActivity())
                         }
                     }
-                    Spacer(Modifier.height(20.dp))
+                    Spacer(Modifier.height(30.dp))
 
                 }
             }
