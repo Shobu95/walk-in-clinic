@@ -36,4 +36,5 @@
     <string name="search">Search Clincs</string>
     <string name="height">Height (ft\'in)</string>
     <string name="weight">Weight (lbs)</string>
+    <string name="title_activity_book_appointment">BookAppointmentActivity</string>
 </resources>

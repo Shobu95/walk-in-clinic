@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:name=".WalkInClinic"
         android:allowBackup="true"
@@ -16,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.book_appointment.BookAppointmentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_book_appointment"
+            android:theme="@style/Theme.AppTheme" />
         <activity
             android:name=".ui.search_clinic.SearchClinicActivity"
             android:exported="false"
@@ -51,11 +55,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBcEZxL5X74ZHkj1G46ksjW8wbqTuAO_iY" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
 
 </manifest>
