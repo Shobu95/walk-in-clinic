@@ -79,7 +79,7 @@ fun SearchClinicBody(
                     icon = bitmapDescriptorFromVector(context, R.drawable.location_marker),
                     onClick = {
                         scope.launch {
-                            delay(2000)
+                            delay(1000)
                             SearchClinicActivity.navigateToBookAppointment(
                                 context,
                                 viewModel.selectedLocation

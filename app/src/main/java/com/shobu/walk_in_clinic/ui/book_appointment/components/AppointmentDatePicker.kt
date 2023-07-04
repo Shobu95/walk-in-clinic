@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.foreverrafs.datepicker.DatePickerTimeline
 import com.foreverrafs.datepicker.state.rememberDatePickerState
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
@@ -32,8 +33,14 @@ fun AppointmentDatePicker(
         dateTextColor = Color.Black,
         eventIndicatorColor = Color.Blue,
         pastDaysCount = 0,
-        onDateSelected = {
-            onDateSelected(it.toString())
+        onDateSelected = { localDate ->
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val newDate = LocalDate.of(
+                localDate.year,
+                localDate.monthValue,
+                localDate.dayOfMonth
+            ).format(formatter)
+            onDateSelected(newDate.toString())
         }
     )
 }

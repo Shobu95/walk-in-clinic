@@ -27,7 +27,7 @@ fun ClinicHeadingPrev() {
 }
 
 @Composable
-fun ClinicHeading(clinicName: String) {
+fun ClinicHeading(clinicLocation: String) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -43,7 +43,7 @@ fun ClinicHeading(clinicName: String) {
         Spacer(modifier = Modifier.width(10.dp))
 
         Text(
-            text = clinicName,
+            text = clinicLocation,
             fontSize = 14.sp,
             fontFamily = FontFamily(Font(R.font.roboto))
         )

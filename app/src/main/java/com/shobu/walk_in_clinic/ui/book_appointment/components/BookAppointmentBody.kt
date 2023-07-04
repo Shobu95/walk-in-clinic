@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shobu.walk_in_clinic.R
+import com.shobu.walk_in_clinic.ui.book_appointment.BookAppointmentEvents
 import com.shobu.walk_in_clinic.ui.book_appointment.BookAppointmentViewModel
 import com.shobu.walk_in_clinic.ui.components.BorderedTextArea
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
@@ -38,7 +39,7 @@ fun BookAppointmentBodyPrev() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookAppointmentBody(
-    clinicName: String,
+    clinicLocation: String,
     viewModel: BookAppointmentViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -59,37 +60,59 @@ fun BookAppointmentBody(
         ) {
 
             HeadingText(heading = "Selected Clinic")
-            ClinicHeading(clinicName = clinicName)
+            ClinicHeading(clinicLocation = clinicLocation)
+            viewModel.onEvent(
+                BookAppointmentEvents.OnStateChanged(
+                    state = viewModel.state.copy(
+                        clinicLocation = clinicLocation,
+                    )
+                )
+            )
 
 
 
             Spacer(modifier = Modifier.height(16.dp))
             HeadingText(heading = "Select Date")
-            AppointmentDatePicker() {
-
+            AppointmentDatePicker { selectedDate ->
+                viewModel.onEvent(
+                    BookAppointmentEvents.OnStateChanged(
+                        state = viewModel.state.copy(
+                            selectedDate = selectedDate
+                        )
+                    )
+                )
             }
 
 
 
             Spacer(modifier = Modifier.height(16.dp))
             HeadingText(heading = "Select Slot")
-            TimeSlotSelector() {
-
+            TimeSlotSelector { selectedSlot ->
+                viewModel.onEvent(
+                    BookAppointmentEvents.OnStateChanged(
+                        state = viewModel.state.copy(
+                            selectedSlot = selectedSlot
+                        )
+                    )
+                )
             }
 
 
 
             Spacer(modifier = Modifier.height(16.dp))
             HeadingText(heading = "Add Reason")
-
-
-            Spacer(modifier = Modifier.height(12.dp))
             var reasonValue = remember { mutableStateOf("") }
             BorderedTextArea(
                 hint = R.string.reason_hint,
                 textFieldValue = reasonValue,
-            ) {
-
+            ) { reason ->
+                viewModel.onEvent(
+                    BookAppointmentEvents.OnStateChanged(
+                        state = viewModel.state.copy(
+                            reason = reason
+                        )
+                    )
+                )
             }
 
 
@@ -98,12 +121,10 @@ fun BookAppointmentBody(
                 buttonText = R.string.title_book_appointment,
                 backgroundColor = MaterialTheme.colorScheme.primary
             ) {
-
+                viewModel.onEvent(BookAppointmentEvents.OnBookAppointmentClicked)
             }
-
 
         }
     }
-
 
 }
