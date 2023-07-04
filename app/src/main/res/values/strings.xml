@@ -37,5 +37,6 @@
     <string name="height">Height (ft\'in)</string>
     <string name="weight">Weight (lbs)</string>
     <string name="title_activity_book_appointment">BookAppointmentActivity</string>
-    <string name="reason_hint">e.g. I am having fever since last 3 days</string>
+    <string name="reason_hint">e.g. I am having fever since last 3 days (optional)</string>
+    <string name="appointment_booking_successful">Your appointment has been booked successfully.</string>
 </resources>

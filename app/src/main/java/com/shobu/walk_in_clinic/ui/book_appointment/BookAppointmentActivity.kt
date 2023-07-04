@@ -1,5 +1,8 @@
 package com.shobu.walk_in_clinic.ui.book_appointment
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,6 +11,7 @@ import androidx.annotation.RequiresApi
 import com.example.walk_in_appointment.ui.theme.WalkInClinicTheme
 import com.shobu.walk_in_clinic.domain.constants.Constants
 import com.shobu.walk_in_clinic.ui.book_appointment.components.BookAppointmentBody
+import com.shobu.walk_in_clinic.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +25,17 @@ class BookAppointmentActivity : ComponentActivity() {
                 val clinicName = intent.getStringExtra(Constants.CLINIC_NAME)
                 BookAppointmentBody(clinicName!!)
             }
+        }
+    }
+
+    companion object {
+        fun navigateToHome(context: Context) {
+            val intent = Intent(
+                context,
+                MainActivity::class.java
+            )
+            context.startActivity(intent)
+            (context as Activity).finishAffinity()
         }
     }
 }

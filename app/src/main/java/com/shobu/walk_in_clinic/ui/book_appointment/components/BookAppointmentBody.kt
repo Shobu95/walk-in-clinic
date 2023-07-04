@@ -13,8 +13,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -22,11 +25,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shobu.walk_in_clinic.R
+import com.shobu.walk_in_clinic.ui.book_appointment.BookAppointmentActivity
 import com.shobu.walk_in_clinic.ui.book_appointment.BookAppointmentEvents
 import com.shobu.walk_in_clinic.ui.book_appointment.BookAppointmentViewModel
 import com.shobu.walk_in_clinic.ui.components.BorderedTextArea
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
+import com.shobu.walk_in_clinic.ui.components.OkAlertDialog
 import com.shobu.walk_in_clinic.ui.components.PrimaryButton
+import com.shobu.walk_in_clinic.ui.components.ProgressDialog
+import kotlinx.coroutines.delay
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview
@@ -43,6 +50,10 @@ fun BookAppointmentBody(
     viewModel: BookAppointmentViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
+    var showDialog by remember { mutableStateOf(false) }
+    var showAlert by remember { mutableStateOf(false) }
+
+
     Scaffold(
         topBar = {
             MyTopAppBar(title = R.string.title_book_appointment, showBack = true) {
@@ -122,6 +133,27 @@ fun BookAppointmentBody(
                 backgroundColor = MaterialTheme.colorScheme.primary
             ) {
                 viewModel.onEvent(BookAppointmentEvents.OnBookAppointmentClicked)
+                showDialog = true
+            }
+
+            if (viewModel.state.bookAppointmentSuccess) {
+                LaunchedEffect(key1 = null) {
+                    delay(2500)
+                    showDialog = false
+                    showAlert = true
+
+
+                }
+            }
+
+            if (showDialog) {
+                ProgressDialog()
+            }
+
+            if (showAlert) {
+                OkAlertDialog(message = R.string.appointment_booking_successful) {
+                    BookAppointmentActivity.navigateToHome(context)
+                }
             }
 
         }
