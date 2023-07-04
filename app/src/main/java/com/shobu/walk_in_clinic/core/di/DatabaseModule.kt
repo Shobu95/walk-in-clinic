@@ -3,6 +3,7 @@ package com.shobu.walk_in_clinic.core.di
 import android.app.Application
 import androidx.room.Room
 import com.shobu.walk_in_clinic.core.database.ApplicationDB
+import com.shobu.walk_in_clinic.data.local.appointment.AppointmentDao
 import com.shobu.walk_in_clinic.data.local.user.UserDao
 import dagger.Module
 import dagger.Provides
@@ -28,5 +29,11 @@ class DatabaseModule {
     @Singleton
     fun providesUserDao(database: ApplicationDB): UserDao {
         return database.userDao
+    }
+
+    @Provides
+    @Singleton
+    fun providesAppointmentDao(database: ApplicationDB): AppointmentDao {
+        return database.appointmentDao
     }
 }
