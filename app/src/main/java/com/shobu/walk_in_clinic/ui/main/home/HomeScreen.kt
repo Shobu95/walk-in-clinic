@@ -41,9 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_clinic.R
+import com.shobu.walk_in_clinic.ui.appointments.MyAppointmentActivity
 import com.shobu.walk_in_clinic.ui.auth.AuthActivity
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
 import com.shobu.walk_in_clinic.ui.main.MainActivity
@@ -59,7 +59,6 @@ fun UpcomingAppointmentScreenPrev() {
     val navController = rememberNavController()
     HomeScreen(
         R.string.title_home,
-        navController
     )
 }
 
@@ -68,7 +67,6 @@ fun UpcomingAppointmentScreenPrev() {
 @Composable
 fun HomeScreen(
     @StringRes title: Int,
-    navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -123,12 +121,22 @@ fun HomeScreen(
                     ) {
                         scope.launch { drawerState.close() }
                         selectedItem.value = item
-                        if (item.title == R.string.title_logout) {
-                            viewModel.onEvent(HomeEvent.OnLogout)
-                        } else if (item.title == R.string.title_profile) {
-                            MainActivity.navigateToActivity(context, ProfileActivity())
-                        } else if (item.title == R.string.title_search_for_clinics) {
-                            MainActivity.navigateToActivity(context, SearchClinicActivity())
+                        when (item.title) {
+                            R.string.title_logout -> {
+                                viewModel.onEvent(HomeEvent.OnLogout)
+                            }
+
+                            R.string.title_profile -> {
+                                MainActivity.navigateToActivity(context, ProfileActivity())
+                            }
+
+                            R.string.title_search_for_clinics -> {
+                                MainActivity.navigateToActivity(context, SearchClinicActivity())
+                            }
+
+                            R.string.title_my_appointments -> {
+                                MainActivity.navigateToActivity(context, MyAppointmentActivity())
+                            }
                         }
                     }
                     Spacer(Modifier.height(30.dp))

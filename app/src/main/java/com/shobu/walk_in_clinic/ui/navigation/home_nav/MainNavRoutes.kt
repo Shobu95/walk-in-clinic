@@ -14,16 +14,4 @@ sealed class MainNavRoutes(
             "home"
         )
 
-    object MyAppointments :
-        MainNavRoutes(
-            R.string.title_my_appointments,
-            "my-appointments"
-        )
-
-    object Profile :
-        MainNavRoutes(
-            R.string.title_profile,
-            "profile"
-        )
-
 }
