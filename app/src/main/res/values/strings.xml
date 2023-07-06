@@ -41,4 +41,6 @@
     <string name="appointment_booking_successful">Your appointment has been booked successfully.</string>
     <string name="title_activity_my_appointment">MyAppointmentActivity</string>
     <string name="upcoming_appointment">Upcoming Appointment</string>
+    <string name="review_your_application">Review Your Application</string>
+    <string name="write_your_review">Write your review (optional)</string>
 </resources>

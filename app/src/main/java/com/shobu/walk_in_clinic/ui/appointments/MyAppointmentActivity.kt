@@ -15,6 +15,10 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,8 +27,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.walk_in_appointment.ui.theme.WalkInClinicTheme
 import com.shobu.walk_in_clinic.R
+import com.shobu.walk_in_clinic.domain.enums.AppointmentStatus
 import com.shobu.walk_in_clinic.ui.appointments.components.AppointmentListItem
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
+import com.shobu.walk_in_clinic.ui.components.RateAndReviewDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,14 +77,26 @@ fun MyAppointmentScreen(
                 .background(color = Color.White)
         ) {
 
+            var showDialog by remember { mutableStateOf(false) }
+
             if (viewModel.state.myAppointments.isNotEmpty()) {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     itemsIndexed(
                         items = viewModel.state.myAppointments,
                         itemContent = { index, item ->
-                            AppointmentListItem(appointment = item)
+                            AppointmentListItem(appointment = item) {
+                                if (item.status == AppointmentStatus.COMPLETED.name) {
+                                    showDialog = true
+                                }
+                            }
                         }
                     )
+                }
+            }
+
+            if (showDialog) {
+                RateAndReviewDialog {
+                    showDialog = false
                 }
             }
 

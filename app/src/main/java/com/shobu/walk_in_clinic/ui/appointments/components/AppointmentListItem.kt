@@ -2,6 +2,7 @@ package com.shobu.walk_in_clinic.ui.appointments.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,11 +48,14 @@ fun AppointmentListItemPrev() {
             reason = "",
             status = AppointmentStatus.BOOKED.name
         )
-    )
+    ) {}
 }
 
 @Composable
-fun AppointmentListItem(appointment: Appointment) {
+fun AppointmentListItem(
+    appointment: Appointment,
+    onClick: () -> Unit
+) {
     Card(
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(
@@ -62,6 +66,7 @@ fun AppointmentListItem(appointment: Appointment) {
             .padding(10.dp)
             .height(120.dp)
             .background(Color.White)
+            .clickable { onClick() }
     ) {
 
         Row(

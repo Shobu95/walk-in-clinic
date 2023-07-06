@@ -179,7 +179,9 @@ fun HomeScreen(
                     if (viewModel.state.appointment.id != null) {
                         Spacer(modifier = Modifier.height(20.dp))
                         HeadingText(heading = stringResource(id = R.string.upcoming_appointment))
-                        AppointmentListItem(appointment = viewModel.state.appointment)
+                        AppointmentListItem(appointment = viewModel.state.appointment) {
+
+                        }
                     }
 
 
