@@ -1,9 +1,9 @@
 package com.shobu.walk_in_clinic.domain.use_cases.appointments
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.shobu.walk_in_clinic.data.repository.AppointmentRepository
+import com.shobu.walk_in_clinic.domain.enums.AppointmentStatus
 import com.shobu.walk_in_clinic.domain.models.Appointment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,15 +27,19 @@ class GetUpcomingAppointmentUseCase
     operator fun invoke() {
         CoroutineScope(Dispatchers.IO).launch {
             appointmentRepository.getAll().collectLatest { list ->
-                val allAppointments = list.sortedBy {
+
+                var allAppointments =
+                    list.filter { it.status == AppointmentStatus.BOOKED.name }
+
+                allAppointments = allAppointments.sortedBy {
                     LocalDate.parse(
                         it.date,
                         DateTimeFormatter.ofPattern("dd/MM/yyyy")
                     )
                 }
+
                 if (allAppointments.isNotEmpty())
                     _upcomingAppointmentState.emit(allAppointments.first())
-                Log.v("all_appointments", allAppointments.toString())
             }
         }
     }
