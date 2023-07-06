@@ -28,6 +28,19 @@ class ValidateUserUseCase
             return Pair(false, "Please select gender")
         }
 
+        if (userState.height.isEmpty()) {
+            return Pair(false, "Please enter height")
+        }
+
+        val pattern = Regex("""^\d+'(\d+)?$""")
+        if (!pattern.containsMatchIn(userState.height)) {
+            return Pair(false, "Please enter valid height")
+        }
+
+        if (userState.weight.isEmpty()) {
+            return Pair(false, "Please enter weight")
+        }
+
         if (userState.email.isEmpty()) {
             return Pair(false, "Please enter email")
         }
