@@ -35,7 +35,7 @@ class SearchClinicActivity : ComponentActivity() {
 
         viewModel.fusedLocationClient =
             LocationServices.getFusedLocationProviderClient(this)
-        Places.initialize(this.applicationContext, "AIzaSyBcEZxL5X74ZHkj1G46ksjW8wbqTuAO_iY")
+        Places.initialize(this.applicationContext, Constants.MAP_KEY)
         viewModel.placesClient = Places.createClient(this)
         viewModel.geoCoder = Geocoder(this)
 

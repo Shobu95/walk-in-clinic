@@ -6,7 +6,8 @@ import javax.inject.Inject
 
 class ValidateUserUseCase
 @Inject constructor(
-    private val passwordValidation: PasswordValidationUseCase
+    private val passwordValidation: PasswordValidationUseCase,
+    private val phoneNumberValidationUseCase: PhoneNumberValidationUseCase
 ) {
 
     operator fun invoke(userState: SignupState): Pair<Boolean, String> {
@@ -15,8 +16,8 @@ class ValidateUserUseCase
             return Pair(false, "Please enter full name")
         }
 
-        if (userState.phoneNumber.isEmpty()) {
-            return Pair(false, "Please enter phone number")
+        if (!phoneNumberValidationUseCase(userState.phoneNumber).first) {
+            return Pair(false, phoneNumberValidationUseCase(userState.phoneNumber).second)
         }
 
         if (userState.dateOfBirth.isEmpty()) {
@@ -33,10 +34,6 @@ class ValidateUserUseCase
 
         if (!Patterns.EMAIL_ADDRESS.matcher(userState.email).matches()) {
             return Pair(false, "Please enter valid email")
-        }
-
-        if (userState.password.isEmpty()) {
-            return Pair(false, "Please enter password")
         }
 
         if (!passwordValidation(userState.password).first) {

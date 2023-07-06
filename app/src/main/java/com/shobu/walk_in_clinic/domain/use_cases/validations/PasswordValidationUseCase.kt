@@ -7,6 +7,10 @@ class PasswordValidationUseCase
 
     operator fun invoke(password: String): Pair<Boolean, String> {
 
+        if (password.isEmpty()) {
+            return Pair(false, "Please enter password")
+        }
+
         if (password.length < 8) {
             return Pair(false, "Password cannot be less than 8 characters")
         }
