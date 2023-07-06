@@ -1,6 +1,5 @@
 package com.shobu.walk_in_clinic.ui.components
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -41,11 +40,8 @@ fun RateAndReviewDialog(
 ) {
     Dialog(onDismissRequest = { onDismiss() }) {
         Surface(
-            modifier = Modifier.border(
-                width = 1.dp,
-                color = Color.White,
-                shape = RoundedCornerShape(20.dp)
-            )
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
         ) {
             Column(Modifier.padding(14.dp)) {
 
