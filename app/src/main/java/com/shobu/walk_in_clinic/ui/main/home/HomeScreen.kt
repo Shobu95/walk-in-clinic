@@ -4,6 +4,8 @@ import NavDrawerItem
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -44,7 +46,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.shobu.walk_in_clinic.R
 import com.shobu.walk_in_clinic.ui.appointments.MyAppointmentActivity
+import com.shobu.walk_in_clinic.ui.appointments.components.AppointmentListItem
 import com.shobu.walk_in_clinic.ui.auth.AuthActivity
+import com.shobu.walk_in_clinic.ui.book_appointment.components.HeadingText
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
 import com.shobu.walk_in_clinic.ui.main.MainActivity
 import com.shobu.walk_in_clinic.ui.navigation.nav_drawer.getNavList
@@ -53,6 +57,7 @@ import com.shobu.walk_in_clinic.ui.search_clinic.SearchClinicActivity
 import kotlinx.coroutines.launch
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun UpcomingAppointmentScreenPrev() {
@@ -62,6 +67,7 @@ fun UpcomingAppointmentScreenPrev() {
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -122,20 +128,20 @@ fun HomeScreen(
                         scope.launch { drawerState.close() }
                         selectedItem.value = item
                         when (item.title) {
-                            R.string.title_logout -> {
-                                viewModel.onEvent(HomeEvent.OnLogout)
-                            }
-
-                            R.string.title_profile -> {
-                                MainActivity.navigateToActivity(context, ProfileActivity())
+                            R.string.title_my_appointments -> {
+                                MainActivity.navigateToActivity(context, MyAppointmentActivity())
                             }
 
                             R.string.title_search_for_clinics -> {
                                 MainActivity.navigateToActivity(context, SearchClinicActivity())
                             }
 
-                            R.string.title_my_appointments -> {
-                                MainActivity.navigateToActivity(context, MyAppointmentActivity())
+                            R.string.title_profile -> {
+                                MainActivity.navigateToActivity(context, ProfileActivity())
+                            }
+
+                            R.string.title_logout -> {
+                                viewModel.onEvent(HomeEvent.OnLogout)
                             }
                         }
                     }
@@ -159,9 +165,8 @@ fun HomeScreen(
                     modifier = Modifier
                         .padding(paddingValues)
                         .fillMaxSize()
-                        .padding(horizontal = 30.dp)
+                        .padding(horizontal = 10.dp)
                         .background(MaterialTheme.colorScheme.background),
-                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
                     if (viewModel.state.onLogout) {
@@ -170,6 +175,12 @@ fun HomeScreen(
                     }
 
                     UserInfo(viewModel.state.fullName)
+
+                    if (viewModel.state.appointment.id != null) {
+                        Spacer(modifier = Modifier.height(20.dp))
+                        HeadingText(heading = stringResource(id = R.string.upcoming_appointment))
+                        AppointmentListItem(appointment = viewModel.state.appointment)
+                    }
 
 
                 }
