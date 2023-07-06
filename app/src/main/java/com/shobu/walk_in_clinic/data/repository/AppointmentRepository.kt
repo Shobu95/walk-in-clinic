@@ -21,6 +21,10 @@ class AppointmentRepository
         appointmentDao.createAppointment(appointment.asEntityModel())
     }
 
+    fun updateAppointment(appointment: Appointment) {
+        appointmentDao.updateAppointment(appointment.asEntityModel())
+    }
+
 }
 
 fun Appointment.asEntityModel(): AppointmentEntity {

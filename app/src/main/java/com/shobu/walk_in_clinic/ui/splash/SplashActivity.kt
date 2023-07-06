@@ -3,9 +3,12 @@ package com.example.walk_in_appointment.ui.splash
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,6 +38,7 @@ import com.shobu.walk_in_clinic.data.prefs.PreferenceKeys
 import com.shobu.walk_in_clinic.data.prefs.UserPreferences
 import com.shobu.walk_in_clinic.ui.auth.AuthActivity
 import com.shobu.walk_in_clinic.ui.main.MainActivity
+import com.shobu.walk_in_clinic.ui.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -45,6 +49,10 @@ class SplashActivity : ComponentActivity() {
 
     @Inject
     lateinit var prefs: UserPreferences
+
+    private val viewModel by viewModels<SplashViewModel>()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -61,6 +69,7 @@ class SplashActivity : ComponentActivity() {
             if (prefs.getString(PreferenceKeys.FULL_NAME, "").isNullOrEmpty()) {
                 navigateActivity(LocalContext.current, AuthActivity())
             } else {
+                viewModel.checkAppointments()
                 navigateActivity(LocalContext.current, MainActivity())
             }
 
@@ -69,7 +78,7 @@ class SplashActivity : ComponentActivity() {
 
     private fun navigateActivity(context: Context, activity: Activity) {
         lifecycleScope.launch {
-            delay(1000)
+            delay(2000)
             val intent = Intent(
                 this@SplashActivity,
                 activity::class.java
