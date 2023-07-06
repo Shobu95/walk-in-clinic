@@ -22,13 +22,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.walk_in_appointment.ui.theme.BookedYellow
+import com.example.walk_in_appointment.ui.theme.CompletedGreen
 import com.example.walk_in_appointment.ui.theme.LightCyan
 import com.shobu.walk_in_clinic.R
 import com.shobu.walk_in_clinic.domain.enums.AppointmentStatus
@@ -57,14 +62,14 @@ fun AppointmentListItem(
     onClick: () -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 5.dp
         ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .height(120.dp)
+            .height(130.dp)
             .background(Color.White)
             .clickable { onClick() }
     ) {
@@ -85,20 +90,26 @@ fun AppointmentListItem(
             ) {
 
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
+                        .clip(RoundedCornerShape(10.dp))
                         .background(LightCyan)
                         .padding(10.dp)
-                        .size(width = 65.dp, height = 55.dp)
+                        .size(width = 65.dp, height = 55.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = getDayFromDate(appointment.date),
-                        fontSize = 26.sp,
+                        fontSize = 28.sp,
+                        color = Color.Black,
                         fontFamily = FontFamily(
                             Font(R.font.roboto),
                         )
                     )
-                    Text(text = getMonthFromDate(appointment.date))
+                    Text(
+                        text = getMonthFromDate(appointment.date),
+                        fontSize = 12.sp,
+                        color = Color.Black,
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
@@ -106,6 +117,7 @@ fun AppointmentListItem(
                 Text(
                     text = appointment.slot,
                     fontSize = 12.sp,
+                    color = Color.Black,
                     fontFamily = FontFamily(Font(R.font.roboto)),
                 )
 
@@ -139,7 +151,13 @@ fun AppointmentListItem(
                         .weight(1f, false)
                 ) {
                     Text(
-                        text = appointment.status
+                        text = appointment.status,
+                        style = TextStyle(
+                            letterSpacing = 1.sp,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = if (appointment.status == "BOOKED") BookedYellow else CompletedGreen,
                     )
                 }
 
