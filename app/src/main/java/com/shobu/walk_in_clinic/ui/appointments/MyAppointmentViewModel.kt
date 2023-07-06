@@ -7,19 +7,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shobu.walk_in_clinic.data.repository.AppointmentRepository
+import com.shobu.walk_in_clinic.domain.use_cases.appointments.GetMyAppointmentsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class MyAppointmentViewModel
 @Inject constructor(
-    private val appointmentRepository: AppointmentRepository
+    private val getMyAppointmentsUseCase: GetMyAppointmentsUseCase
 ) : ViewModel() {
 
     var state by mutableStateOf(MyAppointmentState())
@@ -27,14 +25,10 @@ class MyAppointmentViewModel
 
     init {
         viewModelScope.launch {
-            appointmentRepository.getAll().collectLatest { list ->
+            getMyAppointmentsUseCase.invoke()
+            getMyAppointmentsUseCase.myAppointments.collectLatest { list ->
                 state = state.copy(
-                    myAppointments = list.sortedBy {
-                        LocalDate.parse(
-                            it.date,
-                            DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                        )
-                    }
+                    myAppointments = list
                 )
             }
         }
