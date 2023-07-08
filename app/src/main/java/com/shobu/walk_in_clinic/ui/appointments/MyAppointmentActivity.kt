@@ -35,6 +35,7 @@ import com.example.walk_in_appointment.ui.theme.WalkInClinicTheme
 import com.shobu.walk_in_clinic.R
 import com.shobu.walk_in_clinic.domain.enums.AppointmentStatus
 import com.shobu.walk_in_clinic.ui.appointments.components.AppointmentListItem
+import com.shobu.walk_in_clinic.ui.appointments.components.MyAppointmentEvents
 import com.shobu.walk_in_clinic.ui.components.MyTopAppBar
 import com.shobu.walk_in_clinic.ui.components.RateAndReviewDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -92,7 +93,7 @@ fun MyAppointmentScreen(
                         itemContent = { index, item ->
                             AppointmentListItem(appointment = item) {
                                 if (item.status == AppointmentStatus.COMPLETED.name) {
-                                    showDialog = true
+                                    viewModel.onEvent(MyAppointmentEvents.OpenReviewDialog(item.id!!))
                                 }
                             }
                         }
@@ -108,10 +109,38 @@ fun MyAppointmentScreen(
                 }
             }
 
-            if (showDialog) {
-                RateAndReviewDialog {
-                    showDialog = false
+            if (viewModel.reviewDialogState.openDialog) {
+
+                if (viewModel.reviewDialogState.review != null) {
+                    RateAndReviewDialog(
+                        rating = viewModel.reviewDialogState.review?.rating!!,
+                        review = viewModel.reviewDialogState.review?.review!!,
+                        onSubmit = { rating, reason ->
+                            viewModel.onEvent(MyAppointmentEvents.ClosReviewDialog)
+                            viewModel.onEvent(
+                                MyAppointmentEvents.SaveReview(
+                                    rating = rating,
+                                    review = reason
+                                )
+                            )
+                        }) {
+                        viewModel.onEvent(MyAppointmentEvents.ClosReviewDialog)
+                    }
+                } else {
+                    RateAndReviewDialog(onSubmit = { rating, reason ->
+                        viewModel.onEvent(MyAppointmentEvents.ClosReviewDialog)
+                        viewModel.onEvent(
+                            MyAppointmentEvents.SaveReview(
+                                rating = rating,
+                                review = reason
+                            )
+                        )
+                    }) {
+                        viewModel.onEvent(MyAppointmentEvents.ClosReviewDialog)
+                    }
                 }
+
+
             }
 
         }

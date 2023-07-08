@@ -4,11 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.shobu.walk_in_clinic.data.local.appointment.AppointmentDao
 import com.shobu.walk_in_clinic.data.local.appointment.AppointmentEntity
+import com.shobu.walk_in_clinic.data.local.review.ReviewDao
+import com.shobu.walk_in_clinic.data.local.review.ReviewEntity
 import com.shobu.walk_in_clinic.data.local.user.UserDao
 import com.shobu.walk_in_clinic.data.local.user.UserEntity
 
 @Database(
-    entities = [UserEntity::class, AppointmentEntity::class],
+    entities = [UserEntity::class, AppointmentEntity::class, ReviewEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -19,4 +21,5 @@ abstract class ApplicationDB : RoomDatabase() {
 
     abstract val userDao: UserDao
     abstract val appointmentDao: AppointmentDao
+    abstract val reviewDao: ReviewDao
 }

@@ -31,14 +31,17 @@ import com.shobu.walk_in_clinic.R
 @Preview
 @Composable
 fun RateAndReviewDialogPrev() {
-    RateAndReviewDialog() {}
+    RateAndReviewDialog(onSubmit = { rating, reason -> }) {}
 }
 
 @Composable
 fun RateAndReviewDialog(
-    onDismiss: () -> Unit
+    rating: Int = 0,
+    review: String = "",
+    onSubmit: (rating: Int, review: String) -> Unit,
+    onCancel: () -> Unit
 ) {
-    Dialog(onDismissRequest = { onDismiss() }) {
+    Dialog(onDismissRequest = { }) {
         Surface(
             modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
@@ -54,7 +57,7 @@ fun RateAndReviewDialog(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 val rateState = remember {
-                    mutableStateOf(0)
+                    mutableStateOf(rating)
                 }
 
                 RatingBarView(
@@ -65,7 +68,7 @@ fun RateAndReviewDialog(
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
-                var reasonValue = remember { mutableStateOf("") }
+                var reasonValue = remember { mutableStateOf(review) }
                 BorderedTextArea(
                     hint = R.string.write_your_review,
                     textFieldValue = reasonValue,
@@ -79,10 +82,10 @@ fun RateAndReviewDialog(
                     modifier = Modifier.fillMaxWidth()
                 ) {
 
-                    TextButton(onClick = { onDismiss() })
+                    TextButton(onClick = { onCancel() })
                     { Text(text = "CANCEL") }
 
-                    TextButton(onClick = { onDismiss() })
+                    TextButton(onClick = { onSubmit(rateState.value, reasonValue.value) })
                     { Text(text = "SUBMIT") }
 
                 }
