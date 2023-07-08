@@ -43,4 +43,6 @@
     <string name="upcoming_appointment">Upcoming Appointment</string>
     <string name="review_your_application">Review Your Application</string>
     <string name="write_your_review">Write your review (optional)</string>
+    <string name="no_appointment_message">No Appointments booked yet.</string>
+    <string name="no_upcoming_message">No Upcoming Appointment.</string>
 </resources>

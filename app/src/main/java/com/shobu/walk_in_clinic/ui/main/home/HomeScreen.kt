@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -162,6 +163,7 @@ fun HomeScreen(
                 }
             ) { paddingValues ->
                 Column(
+
                     modifier = Modifier
                         .padding(paddingValues)
                         .fillMaxSize()
@@ -182,9 +184,18 @@ fun HomeScreen(
                         AppointmentListItem(appointment = viewModel.state.appointment) {
 
                         }
+                    } else {
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = stringResource(id = R.string.no_upcoming_message),
+                                fontSize = 20.sp
+                            )
+                        }
                     }
-
-
                 }
             }
         }
