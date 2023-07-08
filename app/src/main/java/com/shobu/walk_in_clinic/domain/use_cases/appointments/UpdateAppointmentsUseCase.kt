@@ -8,8 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -17,9 +19,12 @@ class UpdateAppointmentsUseCase
 @Inject constructor(
     private val appointmentRepository: AppointmentRepository
 ) {
+    private val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    private val currentDate = getCurrentDate()
 
-    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    private val currentDate = LocalDate.now()
+    private val timeFormat = SimpleDateFormat("hh:mm aa")
+    private val currentTime = getCurrentTime()
+
 
     operator fun invoke() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -28,8 +33,9 @@ class UpdateAppointmentsUseCase
                 if (appointments.isEmpty()) return@collectLatest
 
                 appointments.forEach { appointment ->
-                    var appointmentDate = LocalDate.parse(appointment.date, formatter)
-                    if (currentDate.isAfter(appointmentDate)) {
+                    var appointmentDate = LocalDate.parse(appointment.date, dateFormat)
+                    var appointmentTime = timeFormat.parse(appointment.slot)
+                    if (currentDate.isEqual(appointmentDate) && currentTime.after(appointmentTime)) {
                         appointmentRepository.updateAppointment(
                             appointment = appointment.copy(
                                 status = AppointmentStatus.COMPLETED.name
@@ -40,5 +46,15 @@ class UpdateAppointmentsUseCase
             }
         }
 
+    }
+
+    private fun getCurrentTime(): Date {
+        val mToday = Date()
+        val currentTimeString = timeFormat.format(mToday)
+        return timeFormat.parse(currentTimeString)
+    }
+
+    private fun getCurrentDate(): LocalDate {
+        return LocalDate.now()
     }
 }
