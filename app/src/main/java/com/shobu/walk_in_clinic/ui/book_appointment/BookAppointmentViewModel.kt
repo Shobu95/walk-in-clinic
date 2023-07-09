@@ -64,14 +64,15 @@ class BookAppointmentViewModel
                 )
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    appointmentRepository.createAppointment(appointment = newAppointment)
+
                     alarmItem = AlarmItem(
                         time = LocalDateTime.now()
-                            .plusSeconds("10".toLong()),
+                            .plusSeconds("20".toLong()),
                         message = "${newAppointment.locationName} ${newAppointment.date} ${newAppointment.slot}"
                     )
                     alarmItem?.let(scheduler::schedule)
 
+                    appointmentRepository.createAppointment(appointment = newAppointment)
 
                     state = state.copy(
                         bookAppointmentSuccess = true
