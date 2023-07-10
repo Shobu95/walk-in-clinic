@@ -19,7 +19,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -39,7 +41,7 @@ class BookAppointmentViewModel
     init {
         state = state.copy(
             selectedDate = getCurrentDate(),
-            selectedSlot = "8:30 AM"
+            selectedSlot = "08:30 AM"
         )
     }
 
@@ -65,10 +67,30 @@ class BookAppointmentViewModel
 
                 CoroutineScope(Dispatchers.IO).launch {
 
+                    val date = newAppointment.date
+                    val time = newAppointment.slot
+
+                    // Create a DateTimeFormatter for the date and time.
+                    val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
+
+                    // Parse the date and time strings into LocalDateTime objects.
+                    val localDate = LocalDate.parse(date, dateFormatter)
+                    val localTime = LocalTime.parse(time, timeFormatter)
+
+                    // Combine the date and time objects into a single LocalDateTime object.
+                    val localDateTime = localDate.atTime(localTime)
+
+                    // Print the LocalDateTime object.
+                    println("Local Date Time: $localDateTime")
+
                     alarmItem = AlarmItem(
-                        time = LocalDateTime.now()
-                            .plusSeconds("20".toLong()),
-                        message = "${newAppointment.locationName} ${newAppointment.date} ${newAppointment.slot}"
+                        time = localDateTime.minusMinutes("15".toLong()),
+                        message = getMessage(
+                            newAppointment.locationName,
+                            newAppointment.date,
+                            newAppointment.slot
+                        )
                     )
                     alarmItem?.let(scheduler::schedule)
 
@@ -81,6 +103,10 @@ class BookAppointmentViewModel
             }
 
         }
+    }
+
+    private fun getMessage(location: String, date: String, time: String): String {
+        return "You have an appointment today at $location at $time. Please be on time."
     }
 
 
