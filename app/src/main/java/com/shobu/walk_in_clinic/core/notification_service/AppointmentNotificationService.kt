@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.example.walk_in_appointment.ui.splash.SplashActivity
 import com.shobu.walk_in_clinic.R
+import com.shobu.walk_in_clinic.ui.splash.SplashActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 class AppointmentNotificationService(
