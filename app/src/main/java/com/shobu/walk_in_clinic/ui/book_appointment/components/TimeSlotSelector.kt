@@ -29,13 +29,13 @@ fun TimeSlotSelector(
     onTimeSelected: (String) -> Unit
 ) {
     val list = listOf(
-        "08:30 AM",
-        "09:30 AM",
-        "10:30 AM",
-        "11:30 AM",
-        "12:30 PM",
-        "02:00 PM",
-        "03:00 PM"
+        "08:30 am",
+        "09:30 am",
+        "10:30 am",
+        "11:30 am",
+        "12:30 pm",
+        "02:00 pm",
+        "03:00 pm"
     )
 
     val selectedSlot = remember {

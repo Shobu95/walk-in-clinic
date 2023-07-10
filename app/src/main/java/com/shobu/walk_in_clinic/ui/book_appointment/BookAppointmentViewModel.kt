@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -41,7 +42,7 @@ class BookAppointmentViewModel
     init {
         state = state.copy(
             selectedDate = getCurrentDate(),
-            selectedSlot = "08:30 AM"
+            selectedSlot = "08:30 am"
         )
     }
 
@@ -72,7 +73,7 @@ class BookAppointmentViewModel
 
                     // Create a DateTimeFormatter for the date and time.
                     val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                    val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a")
+                    val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.UK)
 
                     // Parse the date and time strings into LocalDateTime objects.
                     val localDate = LocalDate.parse(date, dateFormatter)
