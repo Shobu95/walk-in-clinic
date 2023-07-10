@@ -21,7 +21,7 @@ class WalkInClinic : Application() {
             val channel = NotificationChannel(
                 AppointmentNotificationService.APPOINTMENT_CHANNEL_ID,
                 "Appointment",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             channel.description = "User for displaying appointment notifications"
 
