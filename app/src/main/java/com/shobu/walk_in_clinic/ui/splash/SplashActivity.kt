@@ -1,4 +1,4 @@
-package com.example.walk_in_appointment.ui.splash
+package com.shobu.walk_in_clinic.ui.splash
 
 import android.app.Activity
 import android.content.Context
@@ -38,7 +38,6 @@ import com.shobu.walk_in_clinic.data.prefs.PreferenceKeys
 import com.shobu.walk_in_clinic.data.prefs.UserPreferences
 import com.shobu.walk_in_clinic.ui.auth.AuthActivity
 import com.shobu.walk_in_clinic.ui.main.MainActivity
-import com.shobu.walk_in_clinic.ui.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

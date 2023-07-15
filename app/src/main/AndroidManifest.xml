@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
         android:name=".WalkInClinic"
@@ -52,7 +57,7 @@
             android:label="@string/title_activity_auth"
             android:theme="@style/Theme.AppTheme" />
         <activity
-            android:name="com.example.walk_in_appointment.ui.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
@@ -63,6 +68,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".core.alarm_manager.AlarmReceiver" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
