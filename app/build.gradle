@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.shobu.walk_in_clinic'
+    namespace 'com.app.walk_in_clinic'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.shobu.walk_in_clinic"
+        applicationId "com.app.walk_in_clinic"
         minSdk 23
         targetSdk 33
         versionCode 1
