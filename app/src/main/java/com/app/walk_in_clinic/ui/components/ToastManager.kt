@@ -1,0 +1,16 @@
+package com.app.walk_in_clinic.ui.components
+
+import android.content.Context
+import android.widget.Toast
+
+
+fun ShowToastAlert(
+    context: Context,
+    message: String,
+) {
+    Toast.makeText(
+        context,
+        message,
+        Toast.LENGTH_SHORT
+    ).show()
+}
