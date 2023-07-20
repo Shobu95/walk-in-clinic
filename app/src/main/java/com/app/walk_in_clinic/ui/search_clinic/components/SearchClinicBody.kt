@@ -82,7 +82,7 @@ fun SearchClinicBody(
                             delay(1000)
                             SearchClinicActivity.navigateToBookAppointment(
                                 context,
-                                viewModel.selectedLocation
+                                viewModel.selectedLocation,
                             )
                         }
                         false

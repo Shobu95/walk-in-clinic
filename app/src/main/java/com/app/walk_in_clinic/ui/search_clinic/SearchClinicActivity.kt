@@ -55,6 +55,7 @@ class SearchClinicActivity : ComponentActivity() {
                 BookAppointmentActivity::class.java
             )
             intent.putExtra(Constants.CLINIC_NAME, myLocation.name)
+            intent.putExtra(Constants.CLINIC_ADDRESS, myLocation.address)
             context.startActivity(intent)
         }
     }

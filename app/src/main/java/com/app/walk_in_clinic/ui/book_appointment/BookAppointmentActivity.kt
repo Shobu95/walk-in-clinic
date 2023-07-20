@@ -23,7 +23,8 @@ class BookAppointmentActivity : ComponentActivity() {
             WalkInClinicTheme {
                 // A surface container using the 'background' color from the theme
                 val clinicName = intent.getStringExtra(Constants.CLINIC_NAME)
-                BookAppointmentBody(clinicName!!)
+                val clinicAddress = intent.getStringExtra(Constants.CLINIC_ADDRESS)
+                BookAppointmentBody(clinicName!!, clinicAddress!!)
             }
         }
     }

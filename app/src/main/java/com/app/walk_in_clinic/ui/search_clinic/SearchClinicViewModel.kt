@@ -30,7 +30,7 @@ class SearchClinicViewModel
 
     val locationAutofill = mutableStateListOf<AutocompleteResult>()
 
-    var selectedLocation by mutableStateOf(MyLocation("", ""))
+    var selectedLocation by mutableStateOf(MyLocation("", "", ""))
 
     var currentLatLong by mutableStateOf(LatLng(43.683189, -79.418258))
 
@@ -57,12 +57,13 @@ class SearchClinicViewModel
     }
 
     fun getCoordinates(result: AutocompleteResult) {
-        val placeFields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG)
+        val placeFields =
+            listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS)
         val request = FetchPlaceRequest.newInstance(result.placeId, placeFields)
         placesClient.fetchPlace(request).addOnSuccessListener {
             if (it != null) {
                 currentLatLong = it.place.latLng!!
-                selectedLocation = MyLocation(it.place.id, it.place.name)
+                selectedLocation = MyLocation(it.place.id, it.place.name, result.address)
             }
         }.addOnFailureListener {
             it.printStackTrace()
@@ -116,4 +117,5 @@ data class AutocompleteResult(
 data class MyLocation(
     val id: String,
     val name: String,
+    val address: String
 )

@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.app.walk_in_clinic.R
+import com.app.walk_in_clinic.domain.use_cases.TimeSlotsManager
 import com.app.walk_in_clinic.ui.book_appointment.BookAppointmentActivity
 import com.app.walk_in_clinic.ui.book_appointment.BookAppointmentEvents
 import com.app.walk_in_clinic.ui.book_appointment.BookAppointmentViewModel
@@ -39,7 +40,7 @@ import kotlinx.coroutines.delay
 @Preview
 @Composable
 fun BookAppointmentBodyPrev() {
-    BookAppointmentBody("clinicName")
+    BookAppointmentBody("clinicName", "clinicAddress")
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -47,6 +48,7 @@ fun BookAppointmentBodyPrev() {
 @Composable
 fun BookAppointmentBody(
     clinicLocation: String,
+    clinicAddress: String,
     viewModel: BookAppointmentViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -95,10 +97,10 @@ fun BookAppointmentBody(
             }
 
 
-
+            val timeSlots = TimeSlotsManager.getTimeSlots(clinicAddress)
             Spacer(modifier = Modifier.height(16.dp))
             HeadingText(heading = "Select Slot")
-            TimeSlotSelector { selectedSlot ->
+            TimeSlotSelector(timeSlots) { selectedSlot ->
                 viewModel.onEvent(
                     BookAppointmentEvents.OnStateChanged(
                         state = viewModel.state.copy(

@@ -17,26 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.app.walk_in_clinic.domain.use_cases.TimeSlotsManager
 
 @Preview
 @Composable
 fun TimeSlotSelectorPrev() {
-    TimeSlotSelector() {}
+    TimeSlotSelector(TimeSlotsManager.getTimeSlots("")) {}
 }
 
 @Composable
 fun TimeSlotSelector(
+    timeSlots: List<String>,
     onTimeSelected: (String) -> Unit
 ) {
-    val list = listOf(
-        "08:30 am",
-        "09:30 am",
-        "10:30 am",
-        "11:30 am",
-        "12:30 pm",
-        "02:00 pm",
-        "03:00 pm"
-    )
 
     val selectedSlot = remember {
         mutableStateOf(0)
@@ -44,7 +37,7 @@ fun TimeSlotSelector(
 
     LazyRow(modifier = Modifier.fillMaxWidth()) {
         itemsIndexed(
-            items = list,
+            items = timeSlots,
             itemContent = { index, item ->
                 Card(
                     shape = RoundedCornerShape(22.dp),
