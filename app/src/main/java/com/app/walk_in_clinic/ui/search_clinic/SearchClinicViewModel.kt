@@ -2,7 +2,6 @@ package com.app.walk_in_clinic.ui.search_clinic
 
 import android.annotation.SuppressLint
 import android.location.Geocoder
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -13,6 +12,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -40,9 +40,11 @@ class SearchClinicViewModel
         job?.cancel()
         locationAutofill.clear()
         job = viewModelScope.launch {
-            val request = FindAutocompletePredictionsRequest.builder().setQuery(query).build()
+            val request = FindAutocompletePredictionsRequest.builder()
+                .setQuery(query)
+                .setTypesFilter(listOf(PlaceTypes.HOSPITAL, PlaceTypes.DENTIST, PlaceTypes.HEALTH))
+                .build()
             placesClient.findAutocompletePredictions(request).addOnSuccessListener { response ->
-                Log.v("location_response", response.toString())
                 locationAutofill += response.autocompletePredictions.map {
                     AutocompleteResult(
                         it.getFullText(null).toString(), it.placeId
